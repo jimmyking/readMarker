@@ -3,20 +3,14 @@
 // found in the LICENSE file.
 
 $(document).ready(function(){
-	$('#addReadMarker').live('click',addReadMarker);
 	flashMarkers();
+	$("button").live("click",function(){alert("sd")});
 });
-function addReadMarker() {
-  //var temp=chrome.extension.getBackgroundPage().pageCurrentPageY;
-  //chrome.tabs.executeScript(null,{code:"$(document).scrollTop("+temp+");"});
-  // chrome.tabs.create({url:"http://www.cnbeta.com"},function(){
-  // 	chrome.tabs.executeScript(null,{code:"$(document).scrollTop(111);"});
-  // });
-  //chrome.tabs.executeScript(null,{code:"alert('sd');"});
-}
+
 
 function flashMarkers(){
-	var listhtml="<ul>";
+	var listhtml="";
+	var provinceEl = $('#markerlist');
 	var index=window.localStorage.getItem('Markers:index');
 	if(!index){
 		index=0;
@@ -24,10 +18,14 @@ function flashMarkers(){
 	for (var i = 0; i <= index; i++) {		
 		var marker=window.localStorage.getItem("marker:"+i);
 		var jsonmarker=JSON.parse(marker);
-		
-		listhtml=listhtml+"<li>"+jsonmarker.url+"</li>"
+		var el = $("<li>"+jsonmarker.url+"<button>test</button></li>");
+		el.bind("click",function(){
+			
+			continueReadMarker(jsonmarker.url,jsonmarker.py);
+		});
+		provinceEl.append(el);
 	}
-	listhtml=listhtml+"</ul>"
-	$('#markerlist').html(listhtml);
+	
+	//$('#markerlist').html(listhtml);
 }
 
