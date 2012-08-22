@@ -1,10 +1,10 @@
 var currentPageY=0;
-function tt(){
-	chrome.extension.sendRequest({currentPageY: currentPageY});
+var currentUrl="";
+function addMarker(){
+	chrome.extension.sendRequest({currentPageY: currentPageY,currentUrl:window.location.href});
 }
 
 
 $(document).bind('mouseup',function(e){ 
 	currentPageY = e.pageY;
-    //alert("e.pageX: " + e.pageX + ", e.pageY: " + e.pageY);
 });
