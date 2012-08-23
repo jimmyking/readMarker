@@ -19,13 +19,8 @@ function flashMarkers(){
 		var marker=window.localStorage.getItem("marker:"+i);
 		var jsonmarker=JSON.parse(marker);
 		var el = $("<li>"+jsonmarker.url+"<button>test</button></li>");
-		el.bind("click",function(){
-			
-			continueReadMarker(jsonmarker.url,jsonmarker.py);
-		});
+		el.bind("click",{url:jsonmarker.url,py:jsonmarker.pagey},continueReadMarker);
 		provinceEl.append(el);
 	}
-	
-	//$('#markerlist').html(listhtml);
 }
 
