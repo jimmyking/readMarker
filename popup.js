@@ -4,13 +4,14 @@
 
 $(document).ready(function(){
 	flashMarkers();
-	$("button").live("click",function(){alert("sd")});
+	$("#da").live("click",deleteAllMarker);
 });
 
 
 function flashMarkers(){
 	var listhtml="";
 	var provinceEl = $('#markerlist');
+	provinceEl.html("");
 	var index=window.localStorage.getItem('Markers:index');
 	if(!index){
 		index=0;
@@ -18,9 +19,10 @@ function flashMarkers(){
 	for (var i = 0; i <= index; i++) {		
 		var marker=window.localStorage.getItem("marker:"+i);
 		var jsonmarker=JSON.parse(marker);
-		var el = $("<li>"+jsonmarker.url+"<button>test</button></li>");
+		var el = $("<li>"+jsonmarker.url+"<button>delete</button></li>");
 		el.bind("click",{url:jsonmarker.url,py:jsonmarker.pagey},continueReadMarker);
 		provinceEl.append(el);
 	}
+
 }
 
